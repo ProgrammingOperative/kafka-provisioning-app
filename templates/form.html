@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head><title>Kafka Resource Request</title></head>
+<body>
+  <h2>Request a Kafka Topic & ACL</h2>
+  <form method="POST">
+    <label>Topic Name:</label><br>
+    <input name="topic_name" required><br><br>
+
+    <label>Service Account Name:</label><br>
+    <input name="sa_name" required><br><br>
+
+    <label>ACL Type:</label><br>
+    <select name="acl_type" required>
+      <option value="READ">Read</option>
+      <option value="WRITE">Write</option>
+      <option value="BOTH">Both</option>
+    </select><br><br>
+
+    <label>Team:</label><br>
+    <input name="team" required><br><br>
+
+    <label>Environment:</label><br>
+    <input name="environment" required><br><br>
+
+    <label>Purpose:</label><br>
+    <textarea name="purpose" rows="4" cols="50" required></textarea><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>

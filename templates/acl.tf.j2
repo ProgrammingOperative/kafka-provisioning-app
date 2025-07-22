@@ -1,0 +1,39 @@
+{% if acl_type in ['READ', 'BOTH'] %}
+resource "confluent_kafka_acl" "{{ sa_name }}-read-acl" {
+  kafka_cluster {
+    id = var.kafka_cluster_id
+  }
+  resource_type = "TOPIC"
+  resource_name = "{{ topic_name }}"
+  pattern_type  = "LITERAL"
+  principal     = "User:${confluent_service_account.{{ sa_name }}.id}"
+  host          = "*"
+  operation     = "READ"
+  permission    = "ALLOW"
+  rest_endpoint = var.kafka_rest_endpoint
+  credentials {
+    key    = var.kafka_api_key
+    secret = var.kafka_api_secret
+  }
+}
+{% endif %}
+
+{% if acl_type in ['WRITE', 'BOTH'] %}
+resource "confluent_kafka_acl" "{{ sa_name }}-write-acl" {
+  kafka_cluster {
+    id = var.kafka_cluster_id
+  }
+  resource_type = "TOPIC"
+  resource_name = "{{ topic_name }}"
+  pattern_type  = "LITERAL"
+  principal     = "User:${confluent_service_account.{{ sa_name }}.id}"
+  host          = "*"
+  operation     = "WRITE"
+  permission    = "ALLOW"
+  rest_endpoint = var.kafka_rest_endpoint
+  credentials {
+    key    = var.kafka_api_key
+    secret = var.kafka_api_secret
+  }
+}
+{% endif %}
